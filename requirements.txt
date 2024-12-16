@@ -1,2 +1,2 @@
-
-# Dependências para o projeto
+- name: Install dependencies
+  run: pip install -r requirements.txt

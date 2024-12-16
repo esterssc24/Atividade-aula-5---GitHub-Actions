@@ -1,37 +1,31 @@
-name: Python application
+name: Python application with CI/CD
 
 on:
   push:
     branches:
-      - main  # O workflow será executado sempre que houver um push na branch 'main'
+      - main
 
 jobs:
   build:
-    runs-on: ubuntu-latest  # A máquina onde o workflow será executado (neste caso, uma máquina Ubuntu).
+    runs-on: ubuntu-latest
 
     steps:
-    - name: Checkout code
-      uses: actions/checkout@v3  # Faz o checkout do código-fonte do repositório para o ambiente.
-
-    - name: Set up Python
-      uses: actions/setup-python@v4  # Configura o ambiente com a versão do Python que será utilizada.
-      with:
-        python-version: '3.8'  # Versão do Python para o ambiente.
-
-    - name: Install dependencies
-      run: |
-        python -m pip install --upgrade pip  # Atualiza o pip
-        pip install -r requirements.txt  # Instala as dependências listadas no requirements.txt
-
-    - name: Run tests
-      run: |
-        python -m unittest test_meu_projeto.py  # Executa os testes do arquivo test_meu_projeto.py.
-
-    - name: Package project
-      run: zip -r meu_projeto.zip .  # Compacta o projeto em um arquivo ZIP chamado 'meu_projeto.zip'.
-
-    - name: Upload artifact
-      uses: actions/upload-artifact@v3  # Envia o arquivo ZIP como artefato no GitHub.
-      with:
-        name: meu_projeto-artifact  # Nome do artefato.
-        path: meu_projeto.zip  # Caminho para o arquivo ZIP que será enviado como artefato.
+      - uses: actions/checkout@v3
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.8'
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt
+      - name: Run tests
+        run: |
+          python -m unittest test_conversao.py
+      - name: Package project
+        run: zip -r projeto_conversao.zip .
+      - name: Upload artifact
+        uses: actions/upload-artifact@v3
+        with:
+          name: projeto-conversao-artifact
+          path: projeto_conversao.zip

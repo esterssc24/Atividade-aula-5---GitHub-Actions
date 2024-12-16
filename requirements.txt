@@ -1,2 +1,7 @@
+<<<<<<< HEAD
 - name: Install dependencies
   run: pip install -r requirements.txt
+=======
+
+# Dependências para o projeto
+>>>>>>> f63b9701f39e9f38162065bffac73abf45cada0a
